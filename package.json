@@ -4,6 +4,7 @@
   "author": "Bob Dunn <rpdunn@gmail.com>",
   "dependencies": {
     "cylon": "^0.20.2",
-    "cylon-sphero": "^0.16.0"
+    "cylon-sphero": "^0.16.0",
+    "underscore": "^1.7.0"
   }
 }
