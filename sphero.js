@@ -1,6 +1,6 @@
 var sphero = function () {
 
-    var self = this;
+    var self = {};
 
     var Cylon = require('cylon');
     var math = require('./math');
@@ -61,7 +61,8 @@ var sphero = function () {
             cylon.start();
             started = true;
         }
-    }
+    };
+    return self;
 };
 
-module.exports = sphero;
+module.exports = sphero();

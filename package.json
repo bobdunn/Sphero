@@ -1,0 +1,9 @@
+{
+  "name": "sphero-site",
+  "description": "Controll and watch your sphero from your web!",
+  "author": "Bob Dunn <rpdunn@gmail.com>",
+  "dependencies": {
+    "cylon": "^0.20.2",
+    "cylon-sphero": "^0.16.0"
+  }
+}
