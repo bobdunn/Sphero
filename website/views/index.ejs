@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.js'></script>
+
+</head>
+<body>
+<div style="float:left">
+    <h1><%= title %></h1>
+
+    <p>Here's your data:</p>
+    <pre id="pre"><%= JSON.stringify(data, undefined, 2) %></pre>
+</div>
+<div id="svgContainer" style="float:right"></div>
+<script>
+    var svgContainer = d3.select("#svgContainer").append("svg")
+            .attr("width", 800)
+            .attr("height", 800);
+
+
+    var outerSquare = svgContainer.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 800)
+            .attr("height", 800)
+            .attr("fill", "black");
+
+    var innerSquare = svgContainer.append("rect")
+            .attr("x", 2)
+            .attr("y", 2)
+            .attr("width", 796)
+            .attr("height", 796)
+            .attr("fill", "white");
+
+
+    var socket = io();
+    var currentPoint;
+    socket.on('message', function (msg) {
+        if (currentPoint) {
+            currentPoint.attr('fill', '#111111')
+        }
+        currentPoint = svgContainer.append("circle")
+                .attr("cx", msg.position.x * 4 + 400)
+                .attr("cy", msg.position * 4 + 400)
+                .attr("r", 20);
+
+        document.getElementById('pre').innerHTML = JSON.stringify(msg, undefined, 2);
+
+    });
+</script>
+
+</body>
+</html>
