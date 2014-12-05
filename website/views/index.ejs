@@ -42,10 +42,11 @@
         if (currentPoint) {
             currentPoint.attr('fill', '#111111')
         }
+        console.log(msg);
         currentPoint = svgContainer.append("circle")
-                .attr("cx", msg.position.x * 4 + 400)
-                .attr("cy", msg.position * 4 + 400)
-                .attr("r", 20);
+                .attr("cx", msg.position.position.x * 4 + 400)
+                .attr("cy", msg.position.position.y * 4 + 400)
+                .attr("r", 5);
 
         document.getElementById('pre').innerHTML = JSON.stringify(msg, undefined, 2);
 
