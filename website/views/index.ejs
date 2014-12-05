@@ -40,9 +40,10 @@
     var currentPoint;
     socket.on('message', function (msg) {
         if (currentPoint) {
-            currentPoint.attr('fill', '#111111')
+            currentPoint.transition()
+                    .duration(500)
+                    .style("opacity", 0);
         }
-        console.log(msg);
         currentPoint = svgContainer.append("circle")
                 .attr("cx", msg.position.position.x * 4 + 400)
                 .attr("cy", msg.position.position.y * 4 + 400)
