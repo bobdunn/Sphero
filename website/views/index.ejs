@@ -8,45 +8,51 @@
 
 </head>
 <body>
-<div style="float:left">
+<div style="float:left;width:200px;">
     <h1><%= title %></h1>
 
     <p>Here's your data:</p>
     <pre id="pre"><%= JSON.stringify(data, undefined, 2) %></pre>
 </div>
-<div id="svgContainer" style="float:right"></div>
+<div id="svgContainer"></div>
 <script>
+    var width=800;
+    var height=800;
     var svgContainer = d3.select("#svgContainer").append("svg")
-            .attr("width", 800)
-            .attr("height", 800);
+            .attr("width", width)
+            .attr("height", height);
 
     var outerSquare = svgContainer.append("rect")
             .attr("x", 0)
             .attr("y", 0)
-            .attr("width", 800)
-            .attr("height", 800)
+            .attr("width", width)
+            .attr("height", height)
             .attr("fill", "black");
 
     var innerSquare = svgContainer.append("rect")
             .attr("x", 2)
             .attr("y", 2)
-            .attr("width", 796)
-            .attr("height", 796)
+            .attr("width", width-4)
+            .attr("height", height-4)
             .attr("fill", "white");
 
     var socket = io();
     var currentPoint;
     socket.on('message', function (msg) {
         if (currentPoint) {
+            var hue=180*(Math.sin(msg.position.velocity.speed*Math.PI/1000)+1);
             currentPoint.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-        }
+                    .duration(250)
+                    .attr("cx", msg.position.position.x * 4 + width/2)
+                    .attr("cy", -msg.position.position.y * 4 + height/2)
+                    .attr("fill","hsl("+ hue+",100%,50%)");
+//            console.log(msg)
+        } else {
         currentPoint = svgContainer.append("circle")
-                .attr("cx", msg.position.position.x * 4 + 400)
-                .attr("cy", -msg.position.position.y * 4 + 400)
+                .attr("cx", msg.position.position.x * 4 + width/2)
+                .attr("cy", -msg.position.position.y * 4 + height/2)
                 .attr("r", 5);
-
+        }
         document.getElementById('pre').innerHTML = JSON.stringify(msg, undefined, 2);
 
     });
