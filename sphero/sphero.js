@@ -34,7 +34,7 @@ var sphero = function () {
             var moveTowardTarget = function () {
                 var polar = math.getPolar(targetPosition, currentPosition);
                 var speed = Math.min((polar.r * 5).toFixed(), 255);
-                console.log({polar:polar,speed:speed});
+                //console.log({polar:polar,speed:speed});
                 my.sphero.roll(speed, polar.theta);
             };
 
