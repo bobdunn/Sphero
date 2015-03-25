@@ -1,14 +1,14 @@
 var Cylon = require('cylon');
 
 Cylon.robot({
-    connection: { name: 'sphero', adaptor: 'sphero', port: 'COM6' },
-    device: { name: 'sphero', driver: 'sphero' },
+    connection: {name: 'sphero', adaptor: 'sphero', port: 'COM6'},
+    device: {name: 'sphero', driver: 'sphero'},
 
-    work: function(my) {
+    work: function (my) {
         var color = 0x00FF00,
             bitFilter = 0xFFFF00;
 
-        after((1).seconds(), function() {
+        after((1).seconds(), function () {
             console.log("Setting up Collision Detection...");
             my.sphero.detectCollisions();
             // To detect locator, accelOne and velocity from the sphero
@@ -39,12 +39,12 @@ Cylon.robot({
             my.sphero.stop();
         });
 
-        my.sphero.on('data', function(data) {
+        my.sphero.on('data', function (data) {
             console.log("locator:");
             console.log(data);
         });
 
-        my.sphero.on('collision', function(data) {
+        my.sphero.on('collision', function (data) {
             console.log("Collision:");
             color = color ^ bitFilter;
             console.log("Color: " + (color.toString(16)) + " ");

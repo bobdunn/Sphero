@@ -1,10 +1,10 @@
 var state;
-if(!state){
+if (!state) {
     state = {};
 }
 
 var repo = {
-  state:state
+    state: state
 };
 
 module.exports = repo;

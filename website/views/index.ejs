@@ -16,8 +16,8 @@
 </div>
 <div id="svgContainer"></div>
 <script>
-    var width=800;
-    var height=800;
+    var width = 800;
+    var height = 800;
     var svgContainer = d3.select("#svgContainer").append("svg")
             .attr("width", width)
             .attr("height", height);
@@ -32,26 +32,26 @@
     var innerSquare = svgContainer.append("rect")
             .attr("x", 2)
             .attr("y", 2)
-            .attr("width", width-4)
-            .attr("height", height-4)
+            .attr("width", width - 4)
+            .attr("height", height - 4)
             .attr("fill", "white");
 
     var socket = io();
     var currentPoint;
     socket.on('message', function (msg) {
         if (currentPoint) {
-            var hue=180*(Math.sin(msg.position.velocity.speed*Math.PI/1000)+1);
+            var hue = 180 * (Math.sin(msg.position.velocity.speed * Math.PI / 1000) + 1);
             currentPoint.transition()
                     .duration(250)
-                    .attr("cx", msg.position.position.x * 4 + width/2)
-                    .attr("cy", -msg.position.position.y * 4 + height/2)
-                    .attr("fill","hsl("+ hue+",100%,50%)");
+                    .attr("cx", msg.position.position.x * 4 + width / 2)
+                    .attr("cy", -msg.position.position.y * 4 + height / 2)
+                    .attr("fill", "hsl(" + hue + ",100%,50%)");
 //            console.log(msg)
         } else {
-        currentPoint = svgContainer.append("circle")
-                .attr("cx", msg.position.position.x * 4 + width/2)
-                .attr("cy", -msg.position.position.y * 4 + height/2)
-                .attr("r", 5);
+            currentPoint = svgContainer.append("circle")
+                    .attr("cx", msg.position.position.x * 4 + width / 2)
+                    .attr("cy", -msg.position.position.y * 4 + height / 2)
+                    .attr("r", 5);
         }
         document.getElementById('pre').innerHTML = JSON.stringify(msg, undefined, 2);
 

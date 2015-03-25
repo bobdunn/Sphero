@@ -16,7 +16,8 @@ module.exports = function (http) {
             io.emit('message', message);
         };
     });
-    self.sendMessage=function(){};
+    self.sendMessage = function () {
+    };
     self.subscribe = function (topic, callback) {
         console.log('topic subscribed: ' + topic);
         subscriptions.push({topic: topic, callback: callback});
