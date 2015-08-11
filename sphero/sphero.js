@@ -3,7 +3,8 @@ var math = require('./math');
 var locator = require('./locator');
 var _ = require('underscore');
 
-
+var dataCallbacks = [];
+var started = false;
 
 var targetPosition = {
   x: 0,
@@ -13,8 +14,7 @@ var currentPosition = {
   x: 0,
   y: 0
 };
-var dataCallbacks = [];
-var started = false;
+
 
 var self = {
   setTarget: function(target) {
@@ -56,10 +56,7 @@ var handleData = function(data) {
   _.each(dataCallbacks, function(callback) {
     callback(callbackData);
   });
-
-  moveTowardTarget(my.sphero);
 }
-
 
 var cylon = Cylon.robot({
   connection: {
@@ -79,6 +76,7 @@ var cylon = Cylon.robot({
 
     my.sphero.on('data', function(data) {
       handleData(data);
+      moveTowardTarget(my.sphero);
     });
   }
 });

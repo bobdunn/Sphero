@@ -1,40 +1,40 @@
-var Cylon = require('cylon');
-
-
-Cylon.robot({
-  connection: {
-    name: 'sphero',
-    adaptor: 'sphero',
-    port: process.env.SPHERO_COM_PORT
-  },
-  device: {
-    name: 'sphero',
-    driver: 'sphero'
-  },
-
-  work: function(my) {
-
-    bitFilter = 0xFFFF00;
-
-    after((1).seconds(), function() {
-      setUpCollisions(my.sphero);
-    });
-
-    my.sphero.on('data', function(data) {
-      console.log("locator:");
-      console.log(data);
-    });
-
-    my.sphero.on('collision', function(data) {
-      console.log("Collision:");
-      color = color ^ bitFilter;
-      console.log("Color: " + (color.toString(16)) + " ");
-      my.sphero.setRGB(color);
-      my.sphero.roll(128, Math.floor(Math.random() * 360));
-    });
-
-  }
-}).start();
+// var Cylon = require('cylon');
+//
+//
+// Cylon.robot({
+//   connection: {
+//     name: 'sphero',
+//     adaptor: 'sphero',
+//     port: process.env.SPHERO_COM_PORT
+//   },
+//   device: {
+//     name: 'sphero',
+//     driver: 'sphero'
+//   },
+//
+//   work: function(my) {
+//
+//     bitFilter = 0xFFFF00;
+//
+//     after((1).seconds(), function() {
+//       setUpCollisions(my.sphero);
+//     });
+//
+//     my.sphero.on('data', function(data) {
+//       console.log("locator:");
+//       console.log(data);
+//     });
+//
+//     my.sphero.on('collision', function(data) {
+//       console.log("Collision:");
+//       color = color ^ bitFilter;
+//       console.log("Color: " + (color.toString(16)) + " ");
+//       my.sphero.setRGB(color);
+//       my.sphero.roll(128, Math.floor(Math.random() * 360));
+//     });
+//
+//   }
+// }).start();
 
 
 var setUpCollisions = function(sphero) {
@@ -68,6 +68,7 @@ var setUpCollisions = function(sphero) {
   sphero.setBackLED(192);
   sphero.setRGB(color);
   sphero.stop();
+  console.log('set up collection.')
 }
 
 module.exports = setUpCollisions;
