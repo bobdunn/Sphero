@@ -23,8 +23,6 @@ socket.subscribe('setTarget', function(message) {
 
 sphero.setPositionCallback(function(data) {
   site.setPosition(data);
-  socket.sendMessage({
-    position: data
-  });
+  socket.sendMessage(data);
 });
 sphero.start();

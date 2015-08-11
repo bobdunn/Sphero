@@ -5,6 +5,7 @@ var _ = require('underscore');
 
 var dataCallbacks = [];
 var started = false;
+var random = false;
 
 var targetPosition = {
   x: 0,
@@ -31,6 +32,9 @@ var self = {
       cylon.start();
       started = true;
     }
+  },
+  moveRandomly: function() {
+    random = true;
   }
 };
 
@@ -74,9 +78,12 @@ var cylon = Cylon.robot({
     my.sphero.readLocator();
     my.sphero.configureLocator(1, 0, 0, 0);
 
+    every((.01).second(), function() {
+      moveTowardTarget(my.sphero);
+    });
+
     my.sphero.on('data', function(data) {
       handleData(data);
-      moveTowardTarget(my.sphero);
     });
   }
 });
