@@ -68,7 +68,6 @@ var setUpCollisions = function(sphero) {
   sphero.setBackLED(192);
   sphero.setRGB(color);
   sphero.stop();
-  console.log('set up collection.')
 }
 
 module.exports = setUpCollisions;

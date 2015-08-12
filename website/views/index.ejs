@@ -13,7 +13,8 @@
 
     <p>Here's your data:</p>
     <pre id="pre"><%= JSON.stringify(data, undefined, 2) %></pre>
-    <input onclick="clearTarget()" type="button" value="Click"/> to clear target.
+    <pre id="positionPre"></pre>
+    <input onclick="clearTarget()" type="button" value="Click"/> to clear target.<br/>
     <input onclick="moveRandomly()" type="button" value="Click"/> to move randomly.
 </div>
 <div id="svgContainer"></div>

@@ -14,7 +14,9 @@ var server = site.listen(site.get('port'), function() {
 
 var socket = require('./socket')(server);
 socket.subscribe('setTarget', function(message) {
-  console.log(message);
+  console.log({
+    target: message
+  });
   sphero.moveTo({
     x: message.x * 100,
     y: message.y * 100
