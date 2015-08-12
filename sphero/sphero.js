@@ -5,7 +5,6 @@ var _ = require('underscore');
 
 var dataCallbacks = [];
 var started = false;
-var random = false;
 
 var targetPosition = {
   x: 0,
@@ -32,9 +31,6 @@ var self = {
       cylon.start();
       started = true;
     }
-  },
-  moveRandomly: function() {
-    random = true;
   }
 };
 
